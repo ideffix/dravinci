@@ -1,8 +1,8 @@
-import { ActiveElements, Context, DravinciContext } from './Dravinci'
+import { IActiveElements, IContext, DravinciContext } from './Dravinci'
 import { useContext } from 'react'
 
-export type UseToolsState = Pick<Context, 'tools' | 'setTools'> &
-  Pick<ActiveElements, 'tool' | 'setTool'>
+export type UseToolsState = Pick<IContext, 'tools' | 'setTools'> &
+  Pick<IActiveElements, 'tool' | 'setTool'>
 
 export const useTools = (): UseToolsState => {
   const {

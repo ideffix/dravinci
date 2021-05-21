@@ -1,35 +1,35 @@
 import React, { Dispatch, SetStateAction, useState } from 'react'
 
-export type Context = {
-  tools: Tools
-  setTools: Dispatch<SetStateAction<Tools>>
-  palette: Palette
-  setPalette: Dispatch<SetStateAction<Palette>>
-  activeElements: ActiveElements
+export type IContext = {
+  tools: ITools
+  setTools: Dispatch<SetStateAction<ITools>>
+  palette: IPalette
+  setPalette: Dispatch<SetStateAction<IPalette>>
+  activeElements: IActiveElements
 }
 
-export type ActiveElements = {
-  tool: Tool
-  setTool: Dispatch<SetStateAction<Tool>>
-  color: Color
-  setColor: Dispatch<SetStateAction<Color>>
+export type IActiveElements = {
+  tool: ITool
+  setTool: Dispatch<SetStateAction<ITool>>
+  color: IColor
+  setColor: Dispatch<SetStateAction<IColor>>
 }
 
-export type Tools = Tool[]
+export type ITools = ITool[]
 
-export type Tool = 'pencil' | 'rubber'
+export type ITool = 'pencil' | 'rubber'
 
-export type Color = '#000000' | '#ffffff'
+export type IColor = '#000000' | '#ffffff'
 
-export type Palette = Color[]
+export type IPalette = IColor[]
 
-const defaultPalette: Palette = ['#000000', '#ffffff']
+const defaultPalette: IPalette = ['#000000', '#ffffff']
 
-const defaultTools: Tool[] = ['pencil', 'rubber']
+const defaultTools: ITool[] = ['pencil', 'rubber']
 
 const stubDispatcher = () => {}
 
-const defaultContextValue: Context = {
+const defaultContextValue: IContext = {
   tools: defaultTools,
   setTools: stubDispatcher,
   palette: defaultPalette,

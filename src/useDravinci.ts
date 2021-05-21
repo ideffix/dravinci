@@ -1,4 +1,4 @@
-import { Context, DravinciContext } from './Dravinci'
+import { IContext, DravinciContext } from './Dravinci'
 import { useContext } from 'react'
 
-export const useDravinci = (): Context => useContext(DravinciContext)
+export const useDravinci = (): IContext => useContext(DravinciContext)
