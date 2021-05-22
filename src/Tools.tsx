@@ -1,29 +1,43 @@
 import React from 'react'
 import { useTools } from './useTools'
-import { IActiveElements, IColor, ITool } from './Dravinci'
+import { IActiveElements, ITool } from './Dravinci'
 
 export const Tools: React.VFC = () => {
-  const { setTool, tools, tool } = useTools()
+  const { setActiveToolIndex, tools, activeToolIndex } = useTools()
 
   return (
     <div>
-      {tools.map((t) => (
-        <Tool key={t} tool={t} setTool={setTool} activeTool={tool} />
+      {tools.map((t, i) => (
+        <Tool
+          key={i}
+          activeToolIndex={activeToolIndex}
+          setActiveToolIndex={setActiveToolIndex}
+          tool={t}
+          toolIndex={i}
+        />
       ))}
     </div>
   )
 }
 
-type IProps = Pick<IActiveElements, 'tool' | 'setTool'> & { activeTool: ITool }
+type IProps = {
+  toolIndex: number
+  tool: ITool
+} & Pick<IActiveElements, 'activeToolIndex' | 'setActiveToolIndex'>
 
-const Tool: React.FC<IProps> = ({ tool, setTool, activeTool }) => (
+const Tool: React.FC<IProps> = ({
+  tool,
+  toolIndex,
+  activeToolIndex,
+  setActiveToolIndex,
+}) => (
   <>
     <input
       type={'radio'}
       name={'tool'}
-      value={tool}
-      checked={tool === activeTool}
-      onChange={(e) => setTool(e.target.value as ITool)}
+      value={toolIndex}
+      checked={toolIndex === activeToolIndex}
+      onChange={(e) => setActiveToolIndex(+e.target.value)}
     />
     {tool}
   </>

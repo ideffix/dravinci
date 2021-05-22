@@ -2,13 +2,22 @@ import { IContext, DravinciContext, IActiveElements } from './Dravinci'
 import { useContext } from 'react'
 
 export type UsePaletteState = Pick<IContext, 'palette' | 'setPalette'> &
-  Pick<IActiveElements, 'color' | 'setColor'>
+  Pick<
+    IActiveElements,
+    'activeColorIndex' | 'setActiveColorIndex' | 'activeColor'
+  >
 
 export const usePalette = (): UsePaletteState => {
   const {
     palette,
     setPalette,
-    activeElements: { color, setColor },
+    activeElements: { activeColorIndex, setActiveColorIndex, activeColor },
   } = useContext(DravinciContext)
-  return { palette, setPalette, color, setColor }
+  return {
+    palette,
+    setPalette,
+    activeColorIndex,
+    setActiveColorIndex,
+    activeColor,
+  }
 }

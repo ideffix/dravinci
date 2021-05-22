@@ -2,12 +2,12 @@ import React from 'react'
 import { useActiveElements } from './useActiveElements'
 
 export const Preview: React.VFC = () => {
-  const { color, tool } = useActiveElements()
+  const { activeColor, activeTool } = useActiveElements()
 
   return (
     <div>
-      <div>Active color: {color}</div>
-      <div>Active tool: {tool}</div>
+      <div>Active color: {activeColor}</div>
+      <div>Active tool: {activeTool}</div>
     </div>
   )
 }

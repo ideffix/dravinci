@@ -7,7 +7,7 @@ const areaStyle: CSSProperties = {
   border: '2px solid black',
 }
 
-const App: React.VFC = ({}) => (
+const App: React.VFC = () => (
   <Dravinci>
     <DravinciArea style={areaStyle} width={500} height={400} />
     <DravinciToolbox />

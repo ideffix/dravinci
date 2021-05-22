@@ -9,10 +9,12 @@ export type IContext = {
 }
 
 export type IActiveElements = {
-  tool: ITool
-  setTool: Dispatch<SetStateAction<ITool>>
-  color: IColor
-  setColor: Dispatch<SetStateAction<IColor>>
+  activeTool: ITool
+  activeToolIndex: number
+  setActiveToolIndex: Dispatch<SetStateAction<number>>
+  activeColor: IColor
+  activeColorIndex: number
+  setActiveColorIndex: Dispatch<SetStateAction<number>>
 }
 
 export type ITools = ITool[]
@@ -35,21 +37,30 @@ const defaultContextValue: IContext = {
   palette: defaultPalette,
   setPalette: stubDispatcher,
   activeElements: {
-    color: defaultPalette[0],
-    setColor: stubDispatcher,
-    tool: defaultTools[0],
-    setTool: stubDispatcher,
+    activeColor: defaultPalette[0],
+    activeColorIndex: 0,
+    setActiveColorIndex: stubDispatcher,
+    activeTool: defaultTools[0],
+    activeToolIndex: 0,
+    setActiveToolIndex: stubDispatcher,
   },
 }
 
 export const DravinciContext = React.createContext(defaultContextValue)
 
 export const Dravinci: React.FC = ({ children }) => {
-  const [tool, setTool] = useState(defaultContextValue.activeElements.tool)
-  const [color, setColor] = useState(defaultContextValue.activeElements.color)
+  const [activeToolIndex, setActiveToolIndex] = useState(
+    defaultContextValue.activeElements.activeToolIndex
+  )
+  const [activeColorIndex, setActiveColorIndex] = useState(
+    defaultContextValue.activeElements.activeColorIndex
+  )
 
   const [palette, setPalette] = useState(defaultContextValue.palette)
   const [tools, setTools] = useState(defaultContextValue.tools)
+
+  const activeTool = tools[activeToolIndex]
+  const activeColor = palette[activeColorIndex]
 
   return (
     <DravinciContext.Provider
@@ -58,7 +69,14 @@ export const Dravinci: React.FC = ({ children }) => {
         setTools,
         palette,
         setPalette,
-        activeElements: { tool, setTool, color, setColor },
+        activeElements: {
+          activeToolIndex,
+          setActiveToolIndex,
+          activeColorIndex,
+          setActiveColorIndex,
+          activeTool,
+          activeColor,
+        },
       }}
     >
       {children}
