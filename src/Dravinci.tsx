@@ -21,11 +21,18 @@ export type ITools = ITool[]
 
 export type ITool = 'pencil' | 'rubber'
 
-export type IColor = '#000000' | '#ffffff'
+export type IColor = string
 
 export type IPalette = IColor[]
 
-const defaultPalette: IPalette = ['#000000', '#ffffff']
+const defaultPalette: IPalette = [
+  '#000000',
+  '#ffffff',
+  '#FF0000',
+  '#FFFF00',
+  '#00FF00',
+  '#0000FF',
+]
 
 const defaultTools: ITool[] = ['pencil', 'rubber']
 
