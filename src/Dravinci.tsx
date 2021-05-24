@@ -15,8 +15,7 @@ export type IContext = {
 
 export type IActiveElements = {
   activeTool: ITool
-  activeToolIndex: number
-  setActiveToolIndex: Dispatch<SetStateAction<number>>
+  setActiveTool: Dispatch<SetStateAction<ITool>>
   activeColor: IColor
   activeColorIndex: number
   setActiveColorIndex: Dispatch<SetStateAction<number>>
@@ -53,25 +52,23 @@ const defaultContextValue: IContext = {
     activeColorIndex: 0,
     setActiveColorIndex: stubDispatcher,
     activeTool: defaultTools[0],
-    activeToolIndex: 0,
-    setActiveToolIndex: stubDispatcher,
+    setActiveTool: stubDispatcher,
   },
 }
 
 export const DravinciContext = React.createContext(defaultContextValue)
 
 export const Dravinci: React.FC = ({ children }) => {
-  const [activeToolIndex, setActiveToolIndex] = useState(
-    defaultContextValue.activeElements.activeToolIndex
-  )
   const [activeColorIndex, setActiveColorIndex] = useState(
     defaultContextValue.activeElements.activeColorIndex
+  )
+  const [activeTool, setActiveTool] = useState(
+    defaultContextValue.activeElements.activeTool
   )
 
   const [palette, setPalette] = useState(defaultContextValue.palette)
   const [tools, setTools] = useState(defaultContextValue.tools)
 
-  const activeTool = tools[activeToolIndex]
   const activeColor = palette[activeColorIndex]
 
   return (
@@ -82,11 +79,10 @@ export const Dravinci: React.FC = ({ children }) => {
         palette,
         setPalette,
         activeElements: {
-          activeToolIndex,
-          setActiveToolIndex,
           activeColorIndex,
           setActiveColorIndex,
           activeTool,
+          setActiveTool,
           activeColor,
         },
       }}

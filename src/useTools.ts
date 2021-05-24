@@ -2,13 +2,13 @@ import { IActiveElements, IContext, DravinciContext } from './Dravinci'
 import { useContext } from 'react'
 
 export type UseToolsState = Pick<IContext, 'tools' | 'setTools'> &
-  Pick<IActiveElements, 'activeToolIndex' | 'setActiveToolIndex' | 'activeTool'>
+  Pick<IActiveElements, 'activeTool' | 'setActiveTool'>
 
 export const useTools = (): UseToolsState => {
   const {
     tools,
     setTools,
-    activeElements: { setActiveToolIndex, activeToolIndex, activeTool },
+    activeElements: { activeTool, setActiveTool },
   } = useContext(DravinciContext)
-  return { tools, setTools, setActiveToolIndex, activeToolIndex, activeTool }
+  return { tools, setTools, setActiveTool, activeTool }
 }
