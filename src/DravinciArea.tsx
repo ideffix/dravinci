@@ -1,22 +1,19 @@
 import React, { MouseEventHandler, useRef, useState } from 'react'
 import { useActiveElements } from './useActiveElements'
+import { Offset } from './Dravinci'
+import { DrawableToolMap } from './drawable-tools'
 
 type CanvasProps = React.DetailedHTMLProps<
   React.CanvasHTMLAttributes<HTMLCanvasElement>,
   HTMLCanvasElement
 >
 
-type Offset = {
-  offsetX: number
-  offsetY: number
-}
-
 export const DravinciArea: React.FC<CanvasProps> = ({ ...rest }) => {
   const [isPainting, setIsPainting] = useState(false)
   const [prevPos, setPrevPos] = useState<Offset>({ offsetX: 0, offsetY: 0 })
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  const { activeColor } = useActiveElements()
+  const { activeColor, activeTool } = useActiveElements()
 
   const onMouseDown: MouseEventHandler<HTMLCanvasElement> = ({
     nativeEvent,
@@ -44,19 +41,11 @@ export const DravinciArea: React.FC<CanvasProps> = ({ ...rest }) => {
   }
 
   const paint = (currPos: Offset) => {
-    const { offsetX, offsetY } = currPos
-    const { offsetX: x, offsetY: y } = prevPos
-
     const ctx = canvasRef.current?.getContext('2d')
     if (ctx) {
-      ctx.beginPath()
-      ctx.strokeStyle = activeColor
-      ctx.lineJoin = 'round'
-      ctx.lineCap = 'round'
-      ctx.lineWidth = 5
-      ctx.moveTo(x, y)
-      ctx.lineTo(offsetX, offsetY)
-      ctx.stroke()
+      DrawableToolMap[activeTool].draw(ctx, prevPos, currPos, {
+        color: activeColor,
+      })
     }
   }
 

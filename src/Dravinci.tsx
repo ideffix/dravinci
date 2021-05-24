@@ -1,5 +1,10 @@
 import React, { Dispatch, SetStateAction, useState } from 'react'
 
+export type Offset = {
+  offsetX: number
+  offsetY: number
+}
+
 export type IContext = {
   tools: ITools
   setTools: Dispatch<SetStateAction<ITools>>
