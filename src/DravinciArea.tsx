@@ -1,12 +1,14 @@
 import React, { MouseEventHandler, useRef, useState } from 'react'
 import { useActiveElements } from './useActiveElements'
-import { Offset } from './Dravinci'
+import { ITools, Offset } from './Dravinci'
 import { DrawableToolMap } from './drawable-tools'
 
 type CanvasProps = React.DetailedHTMLProps<
   React.CanvasHTMLAttributes<HTMLCanvasElement>,
   HTMLCanvasElement
 >
+
+const CLICKABLE_TOOLS: ITools = ['bucket']
 
 export const DravinciArea: React.FC<CanvasProps> = ({ ...rest }) => {
   const [isPainting, setIsPainting] = useState(false)
@@ -19,8 +21,13 @@ export const DravinciArea: React.FC<CanvasProps> = ({ ...rest }) => {
     nativeEvent,
   }) => {
     const { offsetX, offsetY } = nativeEvent
-    setIsPainting(true)
-    setPrevPos({ offsetX, offsetY })
+    const currentPos = { offsetX, offsetY }
+    if (CLICKABLE_TOOLS.includes(activeTool)) {
+      paint(currentPos)
+    } else {
+      setIsPainting(true)
+      setPrevPos({ offsetX, offsetY })
+    }
   }
 
   const onMouseMove: MouseEventHandler<HTMLCanvasElement> = ({

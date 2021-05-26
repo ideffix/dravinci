@@ -23,7 +23,7 @@ export type IActiveElements = {
 
 export type ITools = ITool[]
 
-export type ITool = 'pencil' | 'rubber'
+export type ITool = 'pencil' | 'rubber' | 'bucket'
 
 export type IColor = string
 
@@ -38,7 +38,7 @@ const defaultPalette: IPalette = [
   '#0000FF',
 ]
 
-const defaultTools: ITool[] = ['pencil', 'rubber']
+const defaultTools: ITool[] = ['pencil', 'rubber', 'bucket']
 
 const stubDispatcher = () => {}
 

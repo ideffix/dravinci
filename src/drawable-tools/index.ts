@@ -1,6 +1,7 @@
 import { IColor, ITool, Offset } from '../Dravinci'
 import { DrawablePencil } from './pencil'
 import { DrawableRubber } from './rubber'
+import { DrawableBucket } from './bucket'
 
 export type Drawable = {
   draw: (
@@ -16,6 +17,7 @@ export type DrawableConfig = {
 }
 
 export const DrawableToolMap: Record<ITool, Drawable> = {
+  bucket: DrawableBucket,
   pencil: DrawablePencil,
   rubber: DrawableRubber,
 }
