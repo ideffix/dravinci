@@ -15,7 +15,7 @@ export const DravinciArea: React.FC<CanvasProps> = ({ ...rest }) => {
   const [prevPos, setPrevPos] = useState<Offset>({ offsetX: 0, offsetY: 0 })
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  const { activeColor, activeTool } = useActiveElements()
+  const { activeColor, activeTool, activeSize } = useActiveElements()
 
   const onMouseDown: MouseEventHandler<HTMLCanvasElement> = ({
     nativeEvent,
@@ -52,6 +52,7 @@ export const DravinciArea: React.FC<CanvasProps> = ({ ...rest }) => {
     if (ctx) {
       DrawableToolMap[activeTool].draw(ctx, prevPos, currPos, {
         color: activeColor,
+        size: activeSize,
       })
     }
   }

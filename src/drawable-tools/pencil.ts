@@ -12,7 +12,7 @@ export const DrawablePencil: Drawable = {
     ctx.strokeStyle = config.color
     ctx.lineJoin = 'round'
     ctx.lineCap = 'round'
-    ctx.lineWidth = 5
+    ctx.lineWidth = config.size
     ctx.moveTo(prevPos.offsetX, prevPos.offsetY)
     ctx.lineTo(currentPos.offsetX, prevPos.offsetY)
     ctx.stroke()

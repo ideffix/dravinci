@@ -19,6 +19,8 @@ export type IActiveElements = {
   activeColor: IColor
   activeColorIndex: number
   setActiveColorIndex: Dispatch<SetStateAction<number>>
+  activeSize: number
+  setActiveSize: Dispatch<SetStateAction<number>>
 }
 
 export type ITools = ITool[]
@@ -53,6 +55,8 @@ const defaultContextValue: IContext = {
     setActiveColorIndex: stubDispatcher,
     activeTool: defaultTools[0],
     setActiveTool: stubDispatcher,
+    activeSize: 5,
+    setActiveSize: stubDispatcher,
   },
 }
 
@@ -64,6 +68,10 @@ export const Dravinci: React.FC = ({ children }) => {
   )
   const [activeTool, setActiveTool] = useState(
     defaultContextValue.activeElements.activeTool
+  )
+
+  const [activeSize, setActiveSize] = useState(
+    defaultContextValue.activeElements.activeSize
   )
 
   const [palette, setPalette] = useState(defaultContextValue.palette)
@@ -84,6 +92,8 @@ export const Dravinci: React.FC = ({ children }) => {
           activeTool,
           setActiveTool,
           activeColor,
+          activeSize,
+          setActiveSize,
         },
       }}
     >

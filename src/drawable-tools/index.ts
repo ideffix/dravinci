@@ -14,6 +14,7 @@ export type Drawable = {
 
 export type DrawableConfig = {
   color: IColor
+  size: number
 }
 
 export const DrawableToolMap: Record<ITool, Drawable> = {
